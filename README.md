@@ -1,3 +1,4 @@
-# Sentiment-Analysis-TFX
+# TensorFlow Extended and Kubeflow Pipelines using AI Platform Pipelines
 
-WIP
+This repository contains the demo code for the DoiT blog article. 
+Please follow the article for full instructions. 

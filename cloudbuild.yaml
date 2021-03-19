@@ -1,0 +1,16 @@
+steps:
+# Build the image that encapsulates the pipeline.
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/sascha-playground-doit/sentiment-pipeline', '.']
+  dir: 'pipeline' 
+
+  # Create the pipeline using the TFX CLI
+  #- name: 'tensorflow/tfx' # not working info requested
+  # using --build_target_image requires skaffold as part of the base image
+  # building the image on our own is more environment independet
+- name: 'gcr.io/sascha-playground-doit/tfx-cli'
+  args: ['pipeline', 'create', '--engine', 'kubeflow', '--pipeline_path', 'runner.py', '--endpoint', 'https://232685f0707a9b18-dot-us-central1.pipelines.googleusercontent.com']
+  dir: 'pipeline' 
+
+# Push the custom image to Container Registry 
+images: ['gcr.io/sascha-playground-doit/sentiment-pipeline']
